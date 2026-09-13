@@ -1,9 +1,15 @@
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (heroi.vy == 0) {
+        heroi.vy = -250
+    }
+})
+let heroi: Sprite = null
 namespace userconfig {
     export const ARCADE_SCREEN_WIDTH = 320;
     export const ARCADE_SCREEN_HEIGHT = 240;
 }
 scene.setBackgroundImage(assets.image`fundo2`)
-let heroi = sprites.create(assets.image`heroi`, SpriteKind.Player)
+heroi = sprites.create(assets.image`heroi`, SpriteKind.Player)
 controller.moveSprite(heroi, 200, 0)
 heroi.ay = 500
 info.setScore(0)
@@ -92,7 +98,7 @@ heroi,
     ..............................ffffffff............ff6fffffffffffffffffdf................................................
     ..................................................f66ffffffffffffffaafdf................................................
     ..................................................f6666666aaaaf6666aafdf................................................
-    ..................................................f6666666aaaff666aaafff................................................
+    .........................3........................f6666666aaaff666aaafff................................................
     ..................................................f6666666aaaff66aaaaf..................................................
     ..................................................f6666666aaaf6aaaaaaf..................................................
     .................................................ff666666aaaaf666aaaaff.................................................
@@ -382,6 +388,10 @@ true
 heroi.right = 100
 game.onUpdate(function () {
     heroi.setImage(assets.image`heroi`)
+    if (heroi.vy < 0) {
+        let mySprite: Sprite = null
+        mySprite.setImage(assets.image`heroi_pulando`)
+    }
     if (heroi.vx < 0) {
         heroi.image.flipX()
     }
